@@ -83,9 +83,6 @@ body,
   top: 0;
   z-index: 5;
 }
-.app-header :deep(.v-toolbar__content) {
-  padding-inline: 16px;
-}
 .app-header .v-toolbar__content {
   padding-left: 16px !important;
   padding-right: 16px !important;
@@ -111,7 +108,7 @@ body,
   padding-bottom: 88px !important;
   --v-layout-top: 0px;
 }
-.main-content :deep(.v-main__wrap) {
+.main-content .v-main__wrap {
   padding-top: 0;
 }
 
