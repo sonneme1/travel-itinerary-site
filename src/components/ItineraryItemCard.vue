@@ -138,11 +138,14 @@ const open = () => router.push({ name: 'item-detail', params: { id: props.item.i
   align-items: flex-start;
   white-space: nowrap;
 }
+.item-card--hotel .item-card__time {
+  white-space: normal;
+}
 .time-main {
   font-weight: 700;
   font-size: 0.95rem;
   color: rgba(0, 0, 0, 0.85);
-  line-height: 1.1;
+  line-height: 1.15;
 }
 .time-end {
   font-size: 0.7rem;
@@ -159,11 +162,16 @@ const open = () => router.push({ name: 'item-detail', params: { id: props.item.i
   color: white;
 }
 
+.item-card__body {
+  min-width: 0;
+}
 .item-card__body .title {
   font-weight: 600;
   font-size: 1rem;
   color: rgba(0, 0, 0, 0.88);
   line-height: 1.2;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .item-card__body .sub {
   font-size: 0.82rem;
