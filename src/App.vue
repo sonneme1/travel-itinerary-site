@@ -2,16 +2,10 @@
 import { computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useTrip } from '@/stores/trip'
-import { formatLongDate } from '@/utils/format'
 
 const route = useRoute()
 const router = useRouter()
-const { trip, currentDay, days } = useTrip()
-
-const headerDate = computed(() => {
-  const today = days.value.find((d) => d.day === currentDay.value)
-  return today ? formatLongDate(today.date) : ''
-})
+const { trip } = useTrip()
 
 const showBack = computed(() => route.name === 'item-detail')
 const goBack = () => {
