@@ -96,7 +96,7 @@ const fields = computed(() => {
       <div class="hero-label">{{ meta?.label }}</div>
       <div class="hero-title">{{ item.title }}</div>
       <div class="hero-date">
-        Day {{ item.day }} \u00b7 {{ formatLongDate(item.date) }}
+        Day {{ item.day }} · {{ formatLongDate(item.date) }}
       </div>
     </div>
 

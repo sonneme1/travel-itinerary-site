@@ -31,7 +31,9 @@ const isPast = (id: string) => {
 const isHappeningNow = (id: string) => happeningNowItem.value?.id === id
 const isUpNext = (id: string) => upNextItem.value?.id === id && !isHappeningNow(id)
 
-const remaining = computed(() => todays.value.filter((i) => !isPast(i.id)))
+const remaining = computed(() =>
+  todays.value.filter((i) => !isPast(i.id) && !isUpNext(i.id)),
+)
 const past = computed(() => todays.value.filter((i) => isPast(i.id)))
 
 const upNextMeta = computed(() =>
@@ -49,7 +51,7 @@ const upNextTimeText = computed(() => {
 <template>
   <div class="today-view">
     <section class="hero">
-      <div class="eyebrow">Today \u00b7 Day {{ currentDay }}</div>
+      <div class="eyebrow">Today · Day {{ currentDay }}</div>
       <h1 class="hero-title">{{ formatLongDate(todayDate) }}</h1>
       <div v-if="happeningNowItem" class="now-pill">
         <v-icon icon="mdi-circle" size="10" color="error" class="pulse" />
@@ -87,7 +89,9 @@ const upNextTimeText = computed(() => {
         v-for="item in remaining"
         :key="item.id"
         :item="item"
-        :highlight="isUpNext(item.id) || isHappeningNow(item.id)"
+        :highlight="isHappeningNow(item.id)"
+        :tag-text="isHappeningNow(item.id) ? 'Happening now' : undefined"
+        :tag-icon="isHappeningNow(item.id) ? 'mdi-circle' : undefined"
       />
     </section>
 

@@ -9,6 +9,8 @@ const props = defineProps<{
   item: ItineraryItem
   highlight?: boolean
   dim?: boolean
+  tagText?: string
+  tagIcon?: string
 }>()
 
 const router = useRouter()
@@ -62,7 +64,7 @@ const open = () => router.push({ name: 'item-detail', params: { id: props.item.i
 
       <div class="item-card__body">
         <div v-if="highlight" class="up-next-tag">
-          <v-icon icon="mdi-arrow-right-bold" size="14" /> Up next
+          <v-icon :icon="tagIcon ?? 'mdi-arrow-right-bold'" size="14" /> {{ tagText ?? 'Up next' }}
         </div>
         <div class="title">{{ item.title }}</div>
         <div v-if="subText" class="sub">{{ subText }}</div>
@@ -124,7 +126,7 @@ const open = () => router.push({ name: 'item-detail', params: { id: props.item.i
 
 .item-card__row {
   display: grid;
-  grid-template-columns: 56px 44px 1fr 24px;
+  grid-template-columns: 70px 44px 1fr 24px;
   gap: 10px;
   align-items: center;
   min-height: 56px;
@@ -134,6 +136,7 @@ const open = () => router.push({ name: 'item-detail', params: { id: props.item.i
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  white-space: nowrap;
 }
 .time-main {
   font-weight: 700;

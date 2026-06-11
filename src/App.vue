@@ -8,17 +8,6 @@ const route = useRoute()
 const router = useRouter()
 const { trip, currentDay, days } = useTrip()
 
-const activeTab = computed<string>({
-  get() {
-    const name = route.name?.toString() ?? 'today'
-    if (name === 'item-detail') return 'timeline'
-    return name
-  },
-  set(v) {
-    router.push({ name: v })
-  },
-})
-
 const headerDate = computed(() => {
   const today = days.value.find((d) => d.day === currentDay.value)
   return today ? formatLongDate(today.date) : ''
@@ -45,7 +34,6 @@ const goBack = () => {
         </template>
         <div class="header-text">
           <div class="trip-name">{{ trip.name }}</div>
-          <div class="trip-sub">Day {{ currentDay }} · {{ headerDate }}</div>
         </div>
       </v-app-bar>
 
@@ -58,21 +46,20 @@ const goBack = () => {
       </v-main>
 
       <v-bottom-navigation
-        v-model="activeTab"
         color="primary"
         grow
         height="64"
         class="app-bottom-nav"
       >
-        <v-btn value="today" :to="{ name: 'today' }">
+        <v-btn :to="{ name: 'today' }">
           <v-icon>mdi-calendar-today</v-icon>
           <span>Today</span>
         </v-btn>
-        <v-btn value="timeline" :to="{ name: 'timeline' }">
+        <v-btn :to="{ name: 'timeline' }">
           <v-icon>mdi-timeline-text-outline</v-icon>
           <span>Timeline</span>
         </v-btn>
-        <v-btn value="trip" :to="{ name: 'trip' }">
+        <v-btn :to="{ name: 'trip' }">
           <v-icon>mdi-map-outline</v-icon>
           <span>Trip</span>
         </v-btn>
@@ -102,6 +89,13 @@ body,
   top: 0;
   z-index: 5;
 }
+.app-header :deep(.v-toolbar__content) {
+  padding-inline: 16px;
+}
+.app-header .v-toolbar__content {
+  padding-left: 16px !important;
+  padding-right: 16px !important;
+}
 
 .app-header .header-text {
   display: flex;
@@ -119,7 +113,12 @@ body,
 }
 
 .main-content {
+  padding-top: 0 !important;
   padding-bottom: 88px !important;
+  --v-layout-top: 0px;
+}
+.main-content :deep(.v-main__wrap) {
+  padding-top: 0;
 }
 
 .app-bottom-nav {
